@@ -85,7 +85,7 @@
 					<h2 class="content-header">Create Server with Price Estimate Example</h2>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="createContainer">
 				<div id="priceEstimateContainer">
 				  <div id="priceEstimate">
             <h5 class="content-header">COST ESTIMATE AS CONFIGURED</h5>
@@ -292,10 +292,25 @@
     <!-- Include any additional scripts your service needs -->
 
     <script>
-    $(function(){
-      ko.applyBindings({
 
-      });
+    function sticky_relocate() {
+      var window_top = $(window).scrollTop();
+      var div_top = $('#createContainer').offset().top;
+      if (window_top > div_top) {
+        $('#priceEstimateContainer').addClass('stick');
+        $('#createFormContainer').addClass('stick');
+      } else {
+        $('#priceEstimateContainer').removeClass('stick');
+        $('#createFormContainer').removeClass('stick');
+      }
+    }
+
+
+    $(function(){
+      ko.applyBindings({});
+
+      $(window).scroll(sticky_relocate);
+      sticky_relocate();
     })
     </script>
   </body>

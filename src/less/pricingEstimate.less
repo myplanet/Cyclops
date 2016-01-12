@@ -4,13 +4,15 @@
 
 html.cyclops {
 
+  #createContainer {
+    position: relative;
+  }
+
   #priceEstimateContainer {
 
     .make-sm-column(4);
     .make-md-column(3);
 
-    font-weight: @baseFontWeight;
-    overflow: auto;
     padding-top: 15px;
 
     #priceEstimate {
@@ -64,6 +66,11 @@ html.cyclops {
     .make-sm-column(8);
     .make-md-column(9);
 
+    &.stick {
+      .make-sm-column-offset(4);
+      .make-md-column-offset(3);
+    }
+
     padding-top: 15px;
 
     // align rules and buttons with grid col
@@ -83,6 +90,12 @@ html.cyclops {
     #priceEstimateContainer {
       .box-shadow(7px 0 7px -7px rgba(0, 0, 0, 0.2));
 
+      &.stick {
+        position: fixed;
+        top: 0px;
+        z-index: 100;
+        width: inherit;
+      }
 
       .cost-value {
         font-size: 30px;
@@ -92,6 +105,7 @@ html.cyclops {
     }
 
   }
+
 
   // hide cost break down on small screens
   @media (max-width: @screen-xs-max) {
