@@ -10,10 +10,9 @@ html.cyclops {
 
   #priceEstimateContainer {
 
-    .make-sm-column(4);
-    .make-md-column(3);
-
-    padding-top: 15px;
+    float: left;
+    width: 100%;
+    padding: 15px 20px 0 20px;
 
     #priceEstimate {
       background-color: #ffffff;
@@ -63,15 +62,10 @@ html.cyclops {
 
   #createFormContainer {
 
-    .make-sm-column(8);
-    .make-md-column(9);
-
-    &.stick {
-      .make-sm-column-offset(4);
-      .make-md-column-offset(3);
-    }
-
+    float:left;
     padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
 
     // align rules and buttons with grid col
     .form-group.form-submit {
@@ -90,11 +84,16 @@ html.cyclops {
     #priceEstimateContainer {
       .box-shadow(7px 0 7px -7px rgba(0, 0, 0, 0.2));
 
+      width: 250px;
+
       &.stick {
         position: fixed;
         top: 0px;
         z-index: 100;
-        width: inherit;
+
+        & + #createFormContainer {
+          margin-left: 250px;
+        }
       }
 
       .cost-value {
@@ -104,15 +103,39 @@ html.cyclops {
 
     }
 
+    #createFormContainer {
+      width: 510px;
+    }
+
   }
 
+  @media (min-width: @screen-md) {
+
+    #priceEstimateContainer {
+      width: 300px;
+
+      &.stick {
+        & + #createFormContainer {
+          margin-left: 300px;
+        }
+      }
+    }
+    #createFormContainer {
+      width: 680px;
+    }
+  }
+
+  @media (min-width: @screen-lg) {
+    #createFormContainer {
+      width: 880px;
+    }
+  }
 
   // hide cost break down on small screens
   @media (max-width: @screen-xs-max) {
     #priceBreakdown {
       display: none !important;
     }
-
   }
 
 }
