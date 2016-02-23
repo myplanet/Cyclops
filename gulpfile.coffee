@@ -130,15 +130,18 @@ gulp.task 'test-build', ->
   return merge buildCyclops, buildTests
 
 gulp.task 'test-run', ['test-build'], ->
-  return gulp.src './temp/**/*.js'
+  return gulp.src './temp/tests/**/*.js'
     .pipe jasmine {
+            abortOnFail: true
             integration: true
-            keepRunner: false
+            keepRunner: true
             vendor: [
-              'https://code.jquery.com/jquery-2.1.4.min.js'
-              'https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js'
-              'https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js'
-              'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js'
+              'http://code.jquery.com/jquery-2.2.0.min.js'
+              'http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js'
+              'http://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js'
+              'http://code.jquery.com/ui/1.11.4/jquery-ui.min.js'
+              'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js'
+              './temp/cyclops.test.only.js'
             ]
           }
 
@@ -196,7 +199,7 @@ gulp.task 'compile', ['cleanDist', 'less-min', 'script-minify', 'template-minify
   copyImages = gulp.src './www/assets/img/**/*'
     .pipe gulp.dest "./dist/#{pkg.version}/img/"
 
-  renderHTML = gulp.src './www/views/*.html'
+  renderHTML = gulp.src './www/views/**/*.html'
     .pipe through.obj (file, enc, cb) ->
       render = hbs.create().express3
         viewsDir: './www/views'
@@ -273,7 +276,7 @@ gulp.task 'travis-compile', ['less-concat', 'script-concat', 'template-concat', 
   copyImages = gulp.src './www/assets/img/**/*'
     .pipe gulp.dest "./devDist/img/"
 
-  renderHTML = gulp.src './www/views/*.html'
+  renderHTML = gulp.src './www/views/**/*.html'
     .pipe through.obj (file, enc, cb) ->
       render = hbs.create().express3
         viewsDir: './www/views'
